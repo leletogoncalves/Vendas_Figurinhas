@@ -2,14 +2,14 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 
-import { CHECKOUT_PLACEHOLDER, OFFER_PRICE } from "../src/offer.mjs";
+import { CHECKOUT_URL, OFFER_PRICE } from "../src/offer.mjs";
 
 test("offer price is R$14,90", () => {
   assert.equal(OFFER_PRICE, "R$14,90");
 });
 
-test("checkout starts as an internal placeholder until the real link arrives", () => {
-  assert.equal(CHECKOUT_PLACEHOLDER, "#checkout-pendente");
+test("checkout points to the Cakto payment page", () => {
+  assert.equal(CHECKOUT_URL, "https://pay.cakto.com.br/vsgnpgb_933334");
 });
 
 test("landing page renders the expected purchase CTA copy", async () => {
