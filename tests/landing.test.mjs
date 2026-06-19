@@ -24,3 +24,14 @@ test("app imports React for the configured JSX transform", async () => {
 
   assert.match(app, /import React from "react";/);
 });
+
+test("landing includes real proof photos and print guide sections", async () => {
+  const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+
+  assert.match(app, /compare-mbappe\.jpg/);
+  assert.match(app, /compare-le-normand\.jpg/);
+  assert.match(app, /compare-depay\.jpg/);
+  assert.match(app, /print-guide\.jpg/);
+  assert.match(app, /Resultado real/);
+  assert.match(app, /Guia incluso/);
+});

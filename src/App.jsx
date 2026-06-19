@@ -16,6 +16,12 @@ import {
 
 import heroImage from "./assets/kit-hero.png";
 import previewImage from "./assets/preview-sheet.png";
+import compareDepay from "./assets/real-photos/compare-depay.jpg";
+import compareLeNormand from "./assets/real-photos/compare-le-normand.jpg";
+import compareMbappe from "./assets/real-photos/compare-mbappe.jpg";
+import packetsTable from "./assets/real-photos/packets-table.jpg";
+import printGuide from "./assets/real-photos/print-guide.jpg";
+import stickerVariety from "./assets/real-photos/sticker-variety.jpg";
 import { CHECKOUT_URL, OFFER_PRICE, OLD_PRICE } from "./offer.mjs";
 
 const benefits = [
@@ -58,6 +64,24 @@ const pains = [
   "Depender de banca, troca e sorte para completar a brincadeira.",
 ];
 
+const proofPhotos = [
+  {
+    image: compareMbappe,
+    title: "Comparativo em mesa",
+    text: "Foto enviada mostrando a figurinha impressa ao lado da original.",
+  },
+  {
+    image: compareLeNormand,
+    title: "Corte e tamanho",
+    text: "Bom para mostrar proporcao, acabamento e leitura do material.",
+  },
+  {
+    image: compareDepay,
+    title: "Acabamento de perto",
+    text: "Detalhe visual para reforcar que o PDF imprime com boa presenca.",
+  },
+];
+
 const faqs = [
   {
     question: "Como vou receber o kit?",
@@ -77,7 +101,7 @@ const faqs = [
   {
     question: "Esse produto e oficial?",
     answer:
-      "Nao. E um material digital independente, com arte generica inspirada no clima do futebol, sem vinculo com marcas, editoras ou entidades esportivas.",
+      "Nao. E uma pagina de venda independente. Marcas, nomes e imagens exibidos em fotos demonstrativas pertencem aos seus respectivos titulares.",
   },
 ];
 
@@ -175,7 +199,7 @@ export function App() {
               </p>
               <ul className="check-list">
                 <li>Material em PDF com paginas prontas para impressao.</li>
-                <li>Arte generica, independente e sem uso de marcas oficiais.</li>
+                <li>Comparativos reais para mostrar tamanho, corte e acabamento.</li>
                 <li>Preco promocional destacado em todas as chamadas.</li>
               </ul>
             </div>
@@ -184,6 +208,31 @@ export function App() {
               src={previewImage}
               alt="Folha de figurinhas de futebol sendo preparada para impressao"
             />
+          </div>
+        </section>
+
+        <section className="real-proof-section" id="resultado-real">
+          <div className="section-inner">
+            <div className="section-heading">
+              <p className="eyebrow">Resultado real</p>
+              <h2>Veja o PDF impresso comparado com a figurinha original</h2>
+              <p>
+                As fotos entram aqui porque elas vendem o ponto mais importante:
+                o comprador consegue visualizar tamanho, cores e acabamento antes
+                de clicar no checkout.
+              </p>
+            </div>
+            <div className="proof-grid">
+              {proofPhotos.map((photo) => (
+                <article className="proof-card" key={photo.title}>
+                  <img src={photo.image} alt={photo.title} data-real-photo />
+                  <div>
+                    <h3>{photo.title}</h3>
+                    <p>{photo.text}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -201,6 +250,39 @@ export function App() {
           </div>
         </section>
 
+        <section className="kit-preview-section" id="previa-kit">
+          <div className="section-inner split">
+            <div>
+              <p className="eyebrow">Previa do kit</p>
+              <h2>Variedade visual para deixar a oferta mais concreta</h2>
+              <p>
+                Esta parte mostra volume: pacotinhos, figurinhas e pagina de
+                album. Ela fica antes da oferta para aumentar a confianca no que
+                a pessoa esta comprando.
+              </p>
+              <ul className="check-list">
+                <li>Mostra que o produto nao e apenas uma imagem isolada.</li>
+                <li>Ajuda o comprador a imaginar o material impresso em casa.</li>
+                <li>Reforca a economia frente aos pacotes fisicos.</li>
+              </ul>
+            </div>
+            <div className="kit-photo-stack">
+              <img
+                className="wide-photo"
+                src={packetsTable}
+                alt="Mesa com pacotes e figurinhas de futebol"
+                data-real-photo
+              />
+              <img
+                className="wide-photo inset-photo"
+                src={stickerVariety}
+                alt="Colagem com varias figurinhas e previa de album"
+                data-real-photo
+              />
+            </div>
+          </div>
+        </section>
+
         <section className="offer-section" id="checkout-pendente">
           <div className="offer-panel">
             <p className="eyebrow">Oferta especial</p>
@@ -208,7 +290,7 @@ export function App() {
             <ul className="offer-list">
               <li>PDF digital com folhas de figurinhas ilustradas.</li>
               <li>Paginas com visual de album para montar a colecao.</li>
-              <li>Uso independente, sem marcas ou logos oficiais.</li>
+              <li>Pagina e produto digital independente, sem vinculo oficial.</li>
               <li>Acesso preparado para checkout via link externo.</li>
             </ul>
             <div className="price-box">
@@ -221,6 +303,30 @@ export function App() {
               <ShieldCheck aria-hidden="true" size={16} />
               Pronto para PIX, cartao e entrega digital pelo seu checkout
             </p>
+          </div>
+        </section>
+
+        <section className="print-guide-section" id="guia-impressao">
+          <div className="section-inner split guide-layout">
+            <img
+              className="guide-image"
+              src={printGuide}
+              alt="Guia de impressao e montagem das figurinhas"
+              data-real-photo
+            />
+            <div>
+              <p className="eyebrow">Guia incluso</p>
+              <h2>O comprador tambem entende como imprimir e montar</h2>
+              <p>
+                Esta imagem entra perto da garantia porque reduz duvidas comuns:
+                tamanho do papel, escala de impressao, qualidade e corte.
+              </p>
+              <ul className="check-list">
+                <li>Ajuda quem nao sabe configurar a impressora.</li>
+                <li>Mostra recomendacao de papel e acabamento.</li>
+                <li>Diminui perguntas depois da compra.</li>
+              </ul>
+            </div>
           </div>
         </section>
 
@@ -270,7 +376,7 @@ export function App() {
       <footer>
         <div className="section-inner">
           <p>Kit digital independente de figurinhas tematicas de futebol.</p>
-          <p>Sem vinculo com marcas, editoras, entidades oficiais ou torneios registrados.</p>
+          <p>Sem vinculo oficial com marcas, editoras, entidades esportivas ou torneios registrados.</p>
         </div>
       </footer>
 
