@@ -45,3 +45,10 @@ test("landing includes stronger conversion triggers", async () => {
   assert.match(app, /Por que comprar agora/);
   assert.match(app, /Imprima para sempre/);
 });
+
+test("hero uses the promotional offer image", async () => {
+  const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+
+  assert.match(app, /hero-promo\.jpg/);
+  assert.doesNotMatch(app, /kit-hero\.png/);
+});

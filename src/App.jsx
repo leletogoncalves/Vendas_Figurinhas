@@ -14,7 +14,7 @@ import {
   Trophy,
 } from "lucide-react";
 
-import heroImage from "./assets/kit-hero.png";
+import heroImage from "./assets/hero-promo.jpg";
 import previewImage from "./assets/preview-sheet.png";
 import compareDepay from "./assets/real-photos/compare-depay.jpg";
 import compareLeNormand from "./assets/real-photos/compare-le-normand.jpg";
@@ -223,8 +223,8 @@ export function App() {
             </div>
           </div>
 
-          <div className="hero-media" aria-label="Mockup do kit digital">
-            <img src={heroImage} alt="Mockup de album e folhas de figurinhas de futebol para imprimir" />
+          <div className="hero-media" aria-label="Arte promocional do kit digital">
+            <img src={heroImage} alt="Arte promocional do album completo em PDF por R$14,90" />
           </div>
         </section>
 
