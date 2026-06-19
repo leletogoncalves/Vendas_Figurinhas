@@ -28,17 +28,17 @@ const benefits = [
   {
     icon: Trophy,
     title: "Album tematico completo",
-    text: "Folhas organizadas para montar a brincadeira de futebol em casa.",
+    text: "Tudo pronto para transformar folhas impressas em colecao.",
   },
   {
     icon: CircleDollarSign,
-    title: "Preco de pacote pequeno",
-    text: "Uma compra digital, sem repetir gasto toda semana.",
+    title: "Sem depender de sorte",
+    text: "Voce compra o arquivo uma vez e imprime sem esperar vir a figurinha certa.",
   },
   {
     icon: Printer,
-    title: "Imprima quando quiser",
-    text: "Perdeu, rasgou ou quer repetir uma pagina? Imprima novamente.",
+    title: "Imprima para sempre",
+    text: "Perdeu, rasgou ou quer repetir uma pagina? Abra o PDF e imprima de novo.",
   },
   {
     icon: FileCheck2,
@@ -52,16 +52,28 @@ const benefits = [
   },
   {
     icon: Clock3,
-    title: "Entrega imediata",
-    text: "Assim que o checkout estiver ativo, o acesso chega apos a compra.",
+    title: "Entrega na hora",
+    text: "Depois do pagamento, o checkout libera o acesso digital no email.",
   },
 ];
 
 const pains = [
-  "Comprar pacotinho e receber varias repetidas.",
-  "Ver espacos vazios no album por semanas.",
-  "Gastar muito antes de sentir que a colecao avancou.",
-  "Depender de banca, troca e sorte para completar a brincadeira.",
+  {
+    title: "Pacotinho que pesa no bolso",
+    text: "Voce compra de novo e ainda corre o risco de vir so figurinha repetida.",
+  },
+  {
+    title: "Crianca frustrada",
+    text: "A expectativa vira decepcao quando os espacos nunca preenchem.",
+  },
+  {
+    title: "Album que nao fecha",
+    text: "Comprar, trocar, procurar... e a colecao continua travada.",
+  },
+  {
+    title: "Sorte mandando no jogo",
+    text: "Em vez de brincar hoje, voce depende de banca, estoque e acaso.",
+  },
 ];
 
 const proofPhotos = [
@@ -79,6 +91,42 @@ const proofPhotos = [
     image: compareDepay,
     title: "Acabamento de perto",
     text: "Detalhe visual para reforcar que o PDF imprime com boa presenca.",
+  },
+];
+
+const trustBadges = [
+  {
+    icon: Clock3,
+    title: "Entrega na hora no email",
+    text: "Receba o acesso digital apos o pagamento.",
+  },
+  {
+    icon: Printer,
+    title: "Imprima para sempre",
+    text: "Use o arquivo sempre que quiser repetir paginas.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "PIX ou cartao",
+    text: "Compra segura pelo checkout da Cakto.",
+  },
+];
+
+const urgencyReasons = [
+  {
+    icon: CircleDollarSign,
+    title: "Economia imediata",
+    text: "O valor do kit custa menos que poucas idas comprando pacote fisico.",
+  },
+  {
+    icon: Clock3,
+    title: "Comeca hoje",
+    text: "A compra libera o material digital para baixar, imprimir e montar no mesmo dia.",
+  },
+  {
+    icon: FileCheck2,
+    title: "Sem arrependimento por repetidas",
+    text: "Voce sabe exatamente o que esta comprando antes de clicar no botao.",
   },
 ];
 
@@ -137,8 +185,8 @@ export function App() {
   return (
     <>
       <div className="top-strip">
-        <span>Oferta de lancamento</span>
-        <strong>De {OLD_PRICE} por {OFFER_PRICE}</strong>
+        <span>Promocao de lancamento</span>
+        <strong>De {OLD_PRICE} por apenas {OFFER_PRICE}</strong>
       </div>
 
       <main>
@@ -149,19 +197,29 @@ export function App() {
               Kit digital para imprimir
             </p>
             <h1>
-              Figurinhas de futebol 2026 para imprimir, recortar e colecionar
+              Complete sua colecao 2026 sem gastar uma fortuna
             </h1>
             <p className="hero-copy">
-              Um kit em PDF com cards ilustrados, paginas organizadas e visual de
-              album para transformar a brincadeira em casa sem depender de
-              pacotinhos repetidos.
+              Baixe o PDF com figurinhas de futebol, imprima quantas vezes quiser
+              e pare de perder dinheiro com pacotinhos repetidos.
             </p>
             <div className="hero-actions">
               <CheckoutButton>QUERO MEU KIT POR R$14,90</CheckoutButton>
               <p>
                 <LockKeyhole aria-hidden="true" size={15} />
-                PIX ou cartao, entrega digital e acesso imediato
+                PIX ou cartao, entrega digital e acesso imediato pelo checkout
               </p>
+            </div>
+            <div className="hero-trust">
+              {trustBadges.map(({ icon: Icon, title, text }) => (
+                <div className="trust-pill" key={title}>
+                  <Icon aria-hidden="true" size={18} />
+                  <div>
+                    <strong>{title}</strong>
+                    <span>{text}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -173,16 +231,26 @@ export function App() {
         <section className="pain-section">
           <div className="section-inner">
             <div className="section-heading">
-              <p className="eyebrow">O problema</p>
-              <h2>Colecionar deveria ser divertido, nao uma conta sem fim</h2>
+              <p className="eyebrow">O problema que todo colecionador conhece</p>
+              <h2>Cansado de gastar e o album nao fechar?</h2>
+              <p>
+                Se voce ja tentou completar uma colecao comprando pacotinho, essa
+                historia parece familiar.
+              </p>
             </div>
             <div className="pain-list">
               {pains.map((pain) => (
-                <div className="pain-item" key={pain}>
+                <div className="pain-item" key={pain.title}>
                   <BadgeCheck aria-hidden="true" size={20} />
-                  <span>{pain}</span>
+                  <div>
+                    <strong>{pain.title}</strong>
+                    <span>{pain.text}</span>
+                  </div>
                 </div>
               ))}
+            </div>
+            <div className="section-cta">
+              <CheckoutButton>QUERO PARAR DE GASTAR COM REPETIDAS</CheckoutButton>
             </div>
           </div>
         </section>
@@ -194,8 +262,8 @@ export function App() {
               <h2>Receba o arquivo, imprima e monte no seu ritmo</h2>
               <p>
                 Voce recebe um material digital simples de usar, com paginas
-                coloridas e visual caprichado para montar a brincadeira sem
-                depender de sorte.
+                coloridas e visual caprichado para montar a brincadeira hoje,
+                sem esperar pela sorte do proximo pacote.
               </p>
               <ul className="check-list">
                 <li>Material em PDF com paginas prontas para impressao.</li>
@@ -283,6 +351,33 @@ export function App() {
           </div>
         </section>
 
+        <section className="urgency-section">
+          <div className="section-inner">
+            <div className="section-heading">
+              <p className="eyebrow">Decisao simples</p>
+              <h2>Por que comprar agora?</h2>
+              <p>
+                Porque o visitante precisa perceber rapidamente que o kit resolve
+                a dor, economiza dinheiro e entrega a brincadeira no mesmo dia.
+              </p>
+            </div>
+            <div className="urgency-grid">
+              {urgencyReasons.map(({ icon: Icon, title, text }) => (
+                <article className="urgency-card" key={title}>
+                  <div className="icon-box">
+                    <Icon aria-hidden="true" size={22} />
+                  </div>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </article>
+              ))}
+            </div>
+            <div className="section-cta">
+              <CheckoutButton>SIM, QUERO MEU KIT AGORA POR {OFFER_PRICE}</CheckoutButton>
+            </div>
+          </div>
+        </section>
+
         <section className="offer-section" id="checkout-pendente">
           <div className="offer-panel">
             <p className="eyebrow">Oferta especial</p>
@@ -290,8 +385,9 @@ export function App() {
             <ul className="offer-list">
               <li>PDF digital com folhas de figurinhas ilustradas.</li>
               <li>Paginas com visual de album para montar a colecao.</li>
+              <li>Entrega na hora no email depois da confirmacao.</li>
+              <li>Voce pode imprimir para sempre quando precisar.</li>
               <li>Pagina e produto digital independente, sem vinculo oficial.</li>
-              <li>Acesso preparado para checkout via link externo.</li>
             </ul>
             <div className="price-box">
               <span>De {OLD_PRICE}</span>
@@ -301,7 +397,7 @@ export function App() {
             <CheckoutButton>QUERO MEU KIT POR R$14,90</CheckoutButton>
             <p className="secure-line">
               <ShieldCheck aria-hidden="true" size={16} />
-              Pronto para PIX, cartao e entrega digital pelo seu checkout
+              Compra via Cakto, com PIX, cartao e entrega digital
             </p>
           </div>
         </section>
@@ -366,7 +462,7 @@ export function App() {
             <h2>Garanta o kit digital pelo preco promocional</h2>
             <p>
               Receba o arquivo, imprima as paginas e comece a montar a colecao
-              no mesmo dia.
+              hoje sem depender de sorte, troca ou pacotinho repetido.
             </p>
             <CheckoutButton>QUERO MEU KIT POR R$14,90</CheckoutButton>
           </div>

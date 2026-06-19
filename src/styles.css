@@ -176,6 +176,7 @@ h3 {
   box-shadow: 0 16px 34px rgba(36, 191, 98, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.48);
   color: #06130c;
   font-weight: 950;
+  line-height: 1.15;
   text-align: center;
   text-decoration: none;
   transition: transform 150ms ease, box-shadow 150ms ease;
@@ -211,6 +212,43 @@ h3 {
   height: 100%;
   min-height: 0;
   object-fit: cover;
+}
+
+.hero-trust {
+  display: grid;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.trust-pill {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px;
+  border: 1px solid rgba(247, 206, 70, 0.24);
+  border-radius: 8px;
+  background: rgba(16, 53, 34, 0.68);
+  color: #eefbf1;
+}
+
+.trust-pill svg {
+  flex: 0 0 auto;
+  color: var(--gold-400);
+}
+
+.trust-pill strong,
+.trust-pill span {
+  display: block;
+}
+
+.trust-pill strong {
+  margin-bottom: 2px;
+  font-size: 0.9rem;
+}
+
+.trust-pill span {
+  color: var(--muted);
+  font-size: 0.82rem;
 }
 
 .section-inner {
@@ -270,10 +308,28 @@ details,
 .pain-item {
   display: flex;
   gap: 12px;
-  align-items: center;
+  align-items: flex-start;
   padding: 16px;
   color: #f9fff9;
-  font-weight: 750;
+}
+
+.pain-item svg {
+  flex: 0 0 auto;
+}
+
+.pain-item strong,
+.pain-item span {
+  display: block;
+}
+
+.pain-item strong {
+  margin-bottom: 4px;
+  font-weight: 900;
+}
+
+.pain-item span {
+  color: var(--muted);
+  font-size: 0.94rem;
 }
 
 .pain-item svg,
@@ -310,6 +366,12 @@ details,
   border: 1px solid rgba(247, 206, 70, 0.24);
   border-radius: 8px;
   box-shadow: var(--shadow);
+}
+
+.section-cta {
+  display: grid;
+  justify-items: center;
+  margin-top: 26px;
 }
 
 .proof-grid {
@@ -378,6 +440,38 @@ details,
   background:
     linear-gradient(135deg, rgba(247, 206, 70, 0.14), transparent 38%),
     linear-gradient(180deg, #0a1912, #07110d);
+}
+
+.urgency-section {
+  background:
+    linear-gradient(180deg, rgba(247, 206, 70, 0.08), transparent 60%),
+    rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.urgency-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.urgency-card {
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid rgba(247, 206, 70, 0.22);
+  border-radius: 8px;
+  background: rgba(16, 53, 34, 0.7);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.2);
+}
+
+.urgency-card h3,
+.urgency-card p {
+  margin: 0;
+}
+
+.urgency-card p {
+  color: var(--muted);
 }
 
 .kit-preview-section {
@@ -576,6 +670,10 @@ footer p {
     min-height: 520px;
   }
 
+  .hero-trust {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .split {
     grid-template-columns: 0.9fr 1.1fr;
   }
@@ -591,6 +689,10 @@ footer p {
 
   .guide-layout {
     grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  .urgency-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .sticky-cta {
