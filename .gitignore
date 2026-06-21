@@ -3,4 +3,5 @@ dist
 work
 .DS_Store
 .vercel
+.superpowers
 *.log

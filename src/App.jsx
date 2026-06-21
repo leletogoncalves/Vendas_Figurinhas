@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 
 import heroImage from "./assets/hero-promo-site.png";
-import previewImage from "./assets/preview-sheet.png";
 import compareDepay from "./assets/real-photos/compare-depay.jpg";
 import compareLeNormand from "./assets/real-photos/compare-le-normand.jpg";
 import compareMbappe from "./assets/real-photos/compare-mbappe.jpg";
@@ -331,8 +330,9 @@ export function App() {
             </div>
             <img
               className="preview-image"
-              src={previewImage}
-              alt="Folha de figurinhas de futebol sendo preparada para impressao"
+              src={stickerVariety}
+              alt="Colagem com varias figurinhas e previa de album"
+              data-real-photo
             />
           </div>
         </section>
@@ -395,12 +395,6 @@ export function App() {
                 className="wide-photo"
                 src={packetsTable}
                 alt="Mesa com pacotes e figurinhas de futebol"
-                data-real-photo
-              />
-              <img
-                className="wide-photo inset-photo"
-                src={stickerVariety}
-                alt="Colagem com varias figurinhas e previa de album"
                 data-real-photo
               />
             </div>

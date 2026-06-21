@@ -90,3 +90,15 @@ test("hero trust items stay proportional in the narrow hero column", async () =>
   );
   assert.match(css, /\.trust-pill\s*{[\s\S]*grid-template-columns:\s*22px minmax\(0, 1fr\)/);
 });
+
+test("solution section uses the real sticker variety photo", async () => {
+  const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+
+  const solutionSection = app.match(/<section className="solution-section">[\s\S]*?<\/section>/)?.[0] ?? "";
+  const kitPreviewSection = app.match(/<section className="kit-preview-section"[\s\S]*?<\/section>/)?.[0] ?? "";
+
+  assert.match(solutionSection, /src=\{stickerVariety\}/);
+  assert.doesNotMatch(solutionSection, /src=\{previewImage\}/);
+  assert.doesNotMatch(kitPreviewSection, /src=\{stickerVariety\}/);
+  assert.doesNotMatch(app, /preview-sheet\.png/);
+});
