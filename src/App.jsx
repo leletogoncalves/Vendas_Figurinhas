@@ -14,7 +14,7 @@ import {
   Trophy,
 } from "lucide-react";
 
-import heroImage from "./assets/hero-promo.jpg";
+import heroImage from "./assets/hero-promo-site.png";
 import previewImage from "./assets/preview-sheet.png";
 import compareDepay from "./assets/real-photos/compare-depay.jpg";
 import compareLeNormand from "./assets/real-photos/compare-le-normand.jpg";
@@ -94,11 +94,26 @@ const proofPhotos = [
   },
 ];
 
+const heroHighlights = [
+  {
+    icon: FileCheck2,
+    text: "PDF completo para imprimir hoje",
+  },
+  {
+    icon: Clock3,
+    text: "Acesso imediato no email",
+  },
+  {
+    icon: ShieldCheck,
+    text: "Pagamento seguro via Cakto",
+  },
+];
+
 const trustBadges = [
   {
     icon: Clock3,
     title: "Entrega na hora no email",
-    text: "Receba o acesso digital apos o pagamento.",
+    text: "Receba o link digital apos a confirmacao.",
   },
   {
     icon: Printer,
@@ -153,17 +168,51 @@ const faqs = [
   },
 ];
 
-function CheckoutButton({ children, compact = false }) {
+function CheckoutButton({ children, compact = false, hero = false }) {
   return (
     <a
       className={compact ? "cta cta-compact" : "cta"}
       href={CHECKOUT_URL}
       data-checkout-link
+      data-hero-cta={hero ? "true" : undefined}
       aria-label="Comprar kit digital de figurinhas"
     >
       <ShoppingCart aria-hidden="true" size={compact ? 18 : 20} />
       <span>{children}</span>
     </a>
+  );
+}
+
+function StickyCheckoutButton() {
+  const [showSticky, setShowSticky] = React.useState(false);
+
+  React.useEffect(() => {
+    const heroCta = document.querySelector("[data-hero-cta]");
+
+    if (!heroCta || typeof IntersectionObserver === "undefined") {
+      setShowSticky(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowSticky(!entry.isIntersecting);
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(heroCta);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      className={`sticky-cta ${showSticky ? "is-visible" : ""}`}
+      aria-label="Atalho para comprar"
+      aria-hidden={!showSticky}
+    >
+      <CheckoutButton compact>COMPRAR POR {OFFER_PRICE}</CheckoutButton>
+    </div>
   );
 }
 
@@ -197,17 +246,25 @@ export function App() {
               Kit digital para imprimir
             </p>
             <h1>
-              Complete sua colecao 2026 sem gastar uma fortuna
+              PDF completo de figurinhas 2026 por {OFFER_PRICE}
             </h1>
             <p className="hero-copy">
-              Baixe o PDF com figurinhas de futebol, imprima quantas vezes quiser
-              e pare de perder dinheiro com pacotinhos repetidos.
+              Receba um kit digital pronto para baixar, imprimir e montar hoje.
+              Pague uma vez e pare de gastar dinheiro com pacotinhos repetidos.
             </p>
+            <div className="hero-highlights" aria-label="Destaques da oferta">
+              {heroHighlights.map(({ icon: Icon, text }) => (
+                <div className="hero-highlight" key={text}>
+                  <Icon aria-hidden="true" size={17} />
+                  <span>{text}</span>
+                </div>
+              ))}
+            </div>
             <div className="hero-actions">
-              <CheckoutButton>QUERO MEU KIT POR R$14,90</CheckoutButton>
+              <CheckoutButton hero>QUERO MEU KIT POR R$14,90</CheckoutButton>
               <p>
                 <LockKeyhole aria-hidden="true" size={15} />
-                PIX ou cartao, entrega digital e acesso imediato pelo checkout
+                PIX ou cartao, checkout seguro e entrega digital pelo email
               </p>
             </div>
             <div className="hero-trust">
@@ -285,9 +342,8 @@ export function App() {
               <p className="eyebrow">Resultado real</p>
               <h2>Veja o PDF impresso comparado com a figurinha original</h2>
               <p>
-                As fotos entram aqui porque elas vendem o ponto mais importante:
-                o comprador consegue visualizar tamanho, cores e acabamento antes
-                de clicar no checkout.
+                Antes de comprar, veja exemplos impressos para entender tamanho,
+                cores e acabamento do material digital.
               </p>
             </div>
             <div className="proof-grid">
@@ -322,16 +378,15 @@ export function App() {
           <div className="section-inner split">
             <div>
               <p className="eyebrow">Previa do kit</p>
-              <h2>Variedade visual para deixar a oferta mais concreta</h2>
+              <h2>Veja o tipo de material que voce vai receber</h2>
               <p>
-                Esta parte mostra volume: pacotinhos, figurinhas e pagina de
-                album. Ela fica antes da oferta para aumentar a confianca no que
-                a pessoa esta comprando.
+                A previa mostra o visual do kit, as figurinhas e a ideia da
+                colecao montada para voce comprar sabendo o que esperar.
               </p>
               <ul className="check-list">
-                <li>Mostra que o produto nao e apenas uma imagem isolada.</li>
-                <li>Ajuda o comprador a imaginar o material impresso em casa.</li>
-                <li>Reforca a economia frente aos pacotes fisicos.</li>
+                <li>Material digital com paginas prontas para impressao.</li>
+                <li>Visual pensado para imprimir, recortar e colar.</li>
+                <li>Economia frente aos pacotes fisicos repetidos.</li>
               </ul>
             </div>
             <div className="kit-photo-stack">
@@ -357,8 +412,8 @@ export function App() {
               <p className="eyebrow">Decisao simples</p>
               <h2>Por que comprar agora?</h2>
               <p>
-                Porque o visitante precisa perceber rapidamente que o kit resolve
-                a dor, economiza dinheiro e entrega a brincadeira no mesmo dia.
+                A promocao deixa o kit acessivel e voce recebe o arquivo digital
+                para comecar a imprimir sem esperar entrega fisica.
               </p>
             </div>
             <div className="urgency-grid">
@@ -414,8 +469,8 @@ export function App() {
               <p className="eyebrow">Guia incluso</p>
               <h2>O comprador tambem entende como imprimir e montar</h2>
               <p>
-                Esta imagem entra perto da garantia porque reduz duvidas comuns:
-                tamanho do papel, escala de impressao, qualidade e corte.
+                O guia acompanha o material para ajudar com papel, escala de
+                impressao, qualidade e corte das figurinhas.
               </p>
               <ul className="check-list">
                 <li>Ajuda quem nao sabe configurar a impressora.</li>
@@ -476,9 +531,7 @@ export function App() {
         </div>
       </footer>
 
-      <div className="sticky-cta" aria-label="Atalho para comprar">
-        <CheckoutButton compact>COMPRAR POR {OFFER_PRICE}</CheckoutButton>
-      </div>
+      <StickyCheckoutButton />
     </>
   );
 }

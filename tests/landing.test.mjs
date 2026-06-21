@@ -39,16 +39,37 @@ test("landing includes real proof photos and print guide sections", async () => 
 test("landing includes stronger conversion triggers", async () => {
   const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 
-  assert.match(app, /sem gastar uma fortuna/);
+  assert.match(app, /PDF completo para imprimir hoje/);
+  assert.match(app, /Acesso imediato no email/);
   assert.match(app, /Entrega na hora no email/);
   assert.match(app, /Cansado de gastar e o album nao fechar/);
   assert.match(app, /Por que comprar agora/);
   assert.match(app, /Imprima para sempre/);
+  assert.doesNotMatch(app, /As fotos entram aqui/);
+  assert.doesNotMatch(app, /Esta parte mostra/);
 });
 
 test("hero uses the promotional offer image", async () => {
   const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 
-  assert.match(app, /hero-promo\.jpg/);
+  assert.match(app, /hero-promo-site\.png/);
+  assert.doesNotMatch(app, /hero-promo\.jpg/);
   assert.doesNotMatch(app, /kit-hero\.png/);
+});
+
+test("mobile layout shows the promotional image early", async () => {
+  const css = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(css, /@media \(max-width: 719px\)[\s\S]*\.hero-media\s*{[\s\S]*order: -1;/);
+});
+
+test("sticky CTA waits until the hero CTA has scrolled away", async () => {
+  const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+  const css = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(app, /data-hero-cta/);
+  assert.match(app, /IntersectionObserver/);
+  assert.match(app, /sticky-cta \$\{showSticky \? "is-visible" : ""\}/);
+  assert.match(css, /\.sticky-cta\s*{[\s\S]*transform: translateY\(110%\);/);
+  assert.match(css, /\.sticky-cta\.is-visible\s*{[\s\S]*transform: translateY\(0\);/);
 });
