@@ -27,23 +27,23 @@ import { CHECKOUT_URL, OFFER_PRICE, OLD_PRICE } from "./offer.mjs";
 const benefits = [
   {
     icon: Trophy,
-    title: "Album tematico completo",
-    text: "Tudo pronto para transformar folhas impressas em colecao.",
+    title: "Colecao pronta para montar",
+    text: "Tudo organizado para transformar folhas impressas em uma brincadeira completa.",
   },
   {
     icon: CircleDollarSign,
     title: "Sem depender de sorte",
-    text: "Voce compra o arquivo uma vez e imprime sem esperar vir a figurinha certa.",
+    text: "Voce compra uma vez e imprime sem esperar vir a figurinha certa.",
   },
   {
     icon: Printer,
-    title: "Imprima para sempre",
-    text: "Perdeu, rasgou ou quer repetir uma pagina? Abra o PDF e imprima de novo.",
+    title: "Imprima quando quiser",
+    text: "Perdeu, rasgou ou quer repetir uma pagina? Abra o kit e imprima de novo.",
   },
   {
     icon: FileCheck2,
-    title: "Arquivo pronto em PDF",
-    text: "Formato simples para abrir no celular, computador ou papelaria.",
+    title: "Paginas prontas",
+    text: "Kit simples para abrir no celular, computador ou papelaria.",
   },
   {
     icon: Scissors,
@@ -52,7 +52,7 @@ const benefits = [
   },
   {
     icon: Clock3,
-    title: "Entrega na hora",
+    title: "Entrega digital no email",
     text: "Depois do pagamento, o checkout libera o acesso digital no email.",
   },
 ];
@@ -90,14 +90,14 @@ const proofPhotos = [
   {
     image: compareDepay,
     title: "Acabamento de perto",
-    text: "Detalhe visual para reforcar que o PDF imprime com boa presenca.",
+    text: "Detalhe visual para reforcar que as paginas imprimem com boa presenca.",
   },
 ];
 
 const heroHighlights = [
   {
     icon: FileCheck2,
-    text: "PDF completo para imprimir hoje",
+    text: "Monte a colecao sem depender de sorte",
   },
   {
     icon: Clock3,
@@ -105,20 +105,20 @@ const heroHighlights = [
   },
   {
     icon: ShieldCheck,
-    text: "Pagamento seguro via Cakto",
+    text: "Imprima quando quiser",
   },
 ];
 
 const trustBadges = [
   {
     icon: Clock3,
-    title: "Entrega na hora no email",
-    text: "Receba o link digital apos a confirmacao.",
+    title: "Acesso imediato no email",
+    text: "Receba o kit apos a confirmacao.",
   },
   {
     icon: Printer,
-    title: "Imprima para sempre",
-    text: "Use o arquivo sempre que quiser repetir paginas.",
+    title: "Imprima quando quiser",
+    text: "Use as paginas sempre que quiser repetir a brincadeira.",
   },
   {
     icon: ShieldCheck,
@@ -135,8 +135,8 @@ const urgencyReasons = [
   },
   {
     icon: Clock3,
-    title: "Comeca hoje",
-    text: "A compra libera o material digital para baixar, imprimir e montar no mesmo dia.",
+    title: "Monte no seu ritmo",
+    text: "A compra libera o kit para baixar, imprimir e montar no mesmo dia.",
   },
   {
     icon: FileCheck2,
@@ -149,7 +149,7 @@ const faqs = [
   {
     question: "Como vou receber o kit?",
     answer:
-      "O produto e digital. A entrega acontece pelo checkout configurado para liberar o arquivo depois da confirmacao do pagamento.",
+      "O produto e digital. A entrega acontece pelo checkout configurado para liberar o arquivo para imprimir depois da confirmacao do pagamento.",
   },
   {
     question: "Preciso de uma impressora especial?",
@@ -159,7 +159,7 @@ const faqs = [
   {
     question: "Posso imprimir mais de uma vez?",
     answer:
-      "Sim. A proposta e pagar uma vez pelo arquivo digital e imprimir novamente quando precisar.",
+      "Sim. A proposta e pagar uma vez pelo arquivo para imprimir novamente quando precisar.",
   },
   {
     question: "Esse produto e oficial?",
@@ -211,7 +211,7 @@ function StickyCheckoutButton() {
       aria-label="Atalho para comprar"
       aria-hidden={!showSticky}
     >
-      <CheckoutButton compact>COMPRAR POR {OFFER_PRICE}</CheckoutButton>
+      <CheckoutButton compact>LIBERAR KIT POR {OFFER_PRICE}</CheckoutButton>
     </div>
   );
 }
@@ -243,14 +243,15 @@ export function App() {
           <div className="hero-content">
             <p className="eyebrow">
               <Sparkles aria-hidden="true" size={16} />
-              Kit digital para imprimir
+              Kit digital para completar sua colecao
             </p>
             <h1>
-              PDF completo de figurinhas 2026 por {OFFER_PRICE}
+              Complete seu album 2026 hoje sem gastar com pacotinho repetido
             </h1>
             <p className="hero-copy">
-              Receba um kit digital pronto para baixar, imprimir e montar hoje.
-              Pague uma vez e pare de gastar dinheiro com pacotinhos repetidos.
+              Receba o kit na hora, imprima quando quiser e monte a colecao no
+              seu ritmo. Pague uma vez e transforme a brincadeira em algo
+              simples, rapido e economico.
             </p>
             <div className="hero-highlights" aria-label="Destaques da oferta">
               {heroHighlights.map(({ icon: Icon, text }) => (
@@ -261,10 +262,10 @@ export function App() {
               ))}
             </div>
             <div className="hero-actions">
-              <CheckoutButton hero>QUERO MEU KIT POR R$14,90</CheckoutButton>
+              <CheckoutButton hero>LIBERAR MEU KIT POR R$14,90</CheckoutButton>
               <p>
                 <LockKeyhole aria-hidden="true" size={15} />
-                PIX ou cartao, checkout seguro e entrega digital pelo email
+                Compra segura via Cakto, com PIX ou cartao e entrega digital pelo email
               </p>
             </div>
             <div className="hero-trust">
@@ -281,7 +282,7 @@ export function App() {
           </div>
 
           <div className="hero-media" aria-label="Arte promocional do kit digital">
-            <img src={heroImage} alt="Arte promocional do album completo em PDF por R$14,90" />
+            <img src={heroImage} alt="Arte promocional do kit digital para completar o album 2026" />
           </div>
         </section>
 
@@ -289,10 +290,10 @@ export function App() {
           <div className="section-inner">
             <div className="section-heading">
               <p className="eyebrow">O problema que todo colecionador conhece</p>
-              <h2>Cansado de gastar e o album nao fechar?</h2>
+              <h2>Pare de gastar com repetidas e avance na colecao</h2>
               <p>
-                Se voce ja tentou completar uma colecao comprando pacotinho, essa
-                historia parece familiar.
+                Se voce ja tentou completar uma colecao comprando pacotinho, sabe
+                como e frustrante pagar de novo e continuar com espacos vazios.
               </p>
             </div>
             <div className="pain-list">
@@ -307,7 +308,7 @@ export function App() {
               ))}
             </div>
             <div className="section-cta">
-              <CheckoutButton>QUERO PARAR DE GASTAR COM REPETIDAS</CheckoutButton>
+              <CheckoutButton>COMECAR MINHA COLECAO SEM REPETIDAS</CheckoutButton>
             </div>
           </div>
         </section>
@@ -316,16 +317,16 @@ export function App() {
           <div className="section-inner split">
             <div>
               <p className="eyebrow">A solucao</p>
-              <h2>Receba o arquivo, imprima e monte no seu ritmo</h2>
+              <h2>Receba o kit, imprima e monte no seu ritmo</h2>
               <p>
-                Voce recebe um material digital simples de usar, com paginas
-                coloridas e visual caprichado para montar a brincadeira hoje,
-                sem esperar pela sorte do proximo pacote.
+                Voce recebe um kit simples de usar, com paginas coloridas e
+                visual caprichado para montar a colecao hoje, sem
+                esperar pela sorte do proximo pacote.
               </p>
               <ul className="check-list">
-                <li>Material em PDF com paginas prontas para impressao.</li>
+                <li>Paginas coloridas prontas para impressao.</li>
                 <li>Comparativos reais para mostrar tamanho, corte e acabamento.</li>
-                <li>Preco promocional destacado em todas as chamadas.</li>
+                <li>Compra unica para imprimir quando quiser.</li>
               </ul>
             </div>
             <img
@@ -340,10 +341,10 @@ export function App() {
           <div className="section-inner">
             <div className="section-heading">
               <p className="eyebrow">Resultado real</p>
-              <h2>Veja o PDF impresso comparado com a figurinha original</h2>
+              <h2>Veja o material impresso comparado com a figurinha original</h2>
               <p>
                 Antes de comprar, veja exemplos impressos para entender tamanho,
-                cores e acabamento do material digital.
+                cores e acabamento das paginas.
               </p>
             </div>
             <div className="proof-grid">
@@ -384,7 +385,7 @@ export function App() {
                 colecao montada para voce comprar sabendo o que esperar.
               </p>
               <ul className="check-list">
-                <li>Material digital com paginas prontas para impressao.</li>
+                <li>Paginas coloridas prontas para impressao.</li>
                 <li>Visual pensado para imprimir, recortar e colar.</li>
                 <li>Economia frente aos pacotes fisicos repetidos.</li>
               </ul>
@@ -410,9 +411,9 @@ export function App() {
           <div className="section-inner">
             <div className="section-heading">
               <p className="eyebrow">Decisao simples</p>
-              <h2>Por que comprar agora?</h2>
+              <h2>Por que liberar seu kit hoje?</h2>
               <p>
-                A promocao deixa o kit acessivel e voce recebe o arquivo digital
+                A promocao deixa o kit acessivel e voce recebe as paginas
                 para comecar a imprimir sem esperar entrega fisica.
               </p>
             </div>
@@ -428,7 +429,7 @@ export function App() {
               ))}
             </div>
             <div className="section-cta">
-              <CheckoutButton>SIM, QUERO MEU KIT AGORA POR {OFFER_PRICE}</CheckoutButton>
+              <CheckoutButton>LIBERAR MEU KIT AGORA POR {OFFER_PRICE}</CheckoutButton>
             </div>
           </div>
         </section>
@@ -438,7 +439,7 @@ export function App() {
             <p className="eyebrow">Oferta especial</p>
             <h2>Kit Figurinhas Futebol 2026</h2>
             <ul className="offer-list">
-              <li>PDF digital com folhas de figurinhas ilustradas.</li>
+              <li>Produto digital com folhas de figurinhas ilustradas.</li>
               <li>Paginas com visual de album para montar a colecao.</li>
               <li>Entrega na hora no email depois da confirmacao.</li>
               <li>Voce pode imprimir para sempre quando precisar.</li>
@@ -449,10 +450,10 @@ export function App() {
               <strong>{OFFER_PRICE}</strong>
               <small>Pagamento unico</small>
             </div>
-            <CheckoutButton>QUERO MEU KIT POR R$14,90</CheckoutButton>
+            <CheckoutButton>LIBERAR MEU KIT POR R$14,90</CheckoutButton>
             <p className="secure-line">
               <ShieldCheck aria-hidden="true" size={16} />
-              Compra via Cakto, com PIX, cartao e entrega digital
+              Compra segura via Cakto, com PIX, cartao e entrega digital pelo email
             </p>
           </div>
         </section>
@@ -467,7 +468,7 @@ export function App() {
             />
             <div>
               <p className="eyebrow">Guia incluso</p>
-              <h2>O comprador tambem entende como imprimir e montar</h2>
+              <h2>Imprima e monte com mais seguranca desde a primeira folha</h2>
               <p>
                 O guia acompanha o material para ajudar com papel, escala de
                 impressao, qualidade e corte das figurinhas.
@@ -475,7 +476,7 @@ export function App() {
               <ul className="check-list">
                 <li>Ajuda quem nao sabe configurar a impressora.</li>
                 <li>Mostra recomendacao de papel e acabamento.</li>
-                <li>Diminui perguntas depois da compra.</li>
+                <li>Ajuda a evitar erros na impressao e no corte.</li>
               </ul>
             </div>
           </div>
@@ -488,7 +489,7 @@ export function App() {
               <h2>Compra clara, entrega digital e produto independente</h2>
               <p>
                 A comunicacao deixa evidente que o kit nao e oficial e que o
-                comprador recebe um arquivo digital para imprimir.
+                comprador recebe um arquivo para imprimir.
               </p>
             </div>
           </div>
@@ -514,19 +515,19 @@ export function App() {
         <section className="final-section">
           <div className="section-inner narrow">
             <Star aria-hidden="true" size={38} />
-            <h2>Garanta o kit digital pelo preco promocional</h2>
+            <h2>Complete sua colecao hoje pelo preco promocional</h2>
             <p>
-              Receba o arquivo, imprima as paginas e comece a montar a colecao
-              hoje sem depender de sorte, troca ou pacotinho repetido.
+              Receba o kit, imprima as paginas e comece a montar a
+              colecao sem depender de sorte, troca ou pacotinho repetido.
             </p>
-            <CheckoutButton>QUERO MEU KIT POR R$14,90</CheckoutButton>
+            <CheckoutButton>LIBERAR MEU KIT POR R$14,90</CheckoutButton>
           </div>
         </section>
       </main>
 
       <footer>
         <div className="section-inner">
-          <p>Kit digital independente de figurinhas tematicas de futebol.</p>
+          <p>Produto digital independente de figurinhas tematicas de futebol.</p>
           <p>Sem vinculo oficial com marcas, editoras, entidades esportivas ou torneios registrados.</p>
         </div>
       </footer>

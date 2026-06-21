@@ -15,7 +15,7 @@ test("checkout points to the Cakto payment page", () => {
 test("landing page renders the expected purchase CTA copy", async () => {
   const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 
-  assert.match(app, /QUERO MEU KIT POR R\$14,90/);
+  assert.match(app, /LIBERAR MEU KIT POR R\$14,90/);
   assert.match(app, /data-checkout-link/);
 });
 
@@ -36,17 +36,16 @@ test("landing includes real proof photos and print guide sections", async () => 
   assert.match(app, /Guia incluso/);
 });
 
-test("landing includes stronger conversion triggers", async () => {
+test("landing leads with buyer desire instead of file format", async () => {
   const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 
-  assert.match(app, /PDF completo para imprimir hoje/);
+  assert.match(app, /Complete seu album 2026 hoje sem gastar com pacotinho repetido/);
+  assert.match(app, /Liberar meu kit por R\$14,90/i);
+  assert.match(app, /Monte a colecao sem depender de sorte/);
   assert.match(app, /Acesso imediato no email/);
-  assert.match(app, /Entrega na hora no email/);
-  assert.match(app, /Cansado de gastar e o album nao fechar/);
-  assert.match(app, /Por que comprar agora/);
-  assert.match(app, /Imprima para sempre/);
-  assert.doesNotMatch(app, /As fotos entram aqui/);
-  assert.doesNotMatch(app, /Esta parte mostra/);
+  assert.doesNotMatch(app, /PDF/);
+  assert.doesNotMatch(app, /PDF completo de figurinhas 2026 por/);
+  assert.doesNotMatch(app, /PDF completo para imprimir hoje/);
 });
 
 test("hero uses the promotional offer image", async () => {
