@@ -72,3 +72,21 @@ test("sticky CTA waits until the hero CTA has scrolled away", async () => {
   assert.match(css, /\.sticky-cta\s*{[\s\S]*transform: translateY\(110%\);/);
   assert.match(css, /\.sticky-cta\.is-visible\s*{[\s\S]*transform: translateY\(0\);/);
 });
+
+test("hero trust items stay proportional in the narrow hero column", async () => {
+  const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+  const css = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(app, /title: "Acesso imediato"/);
+  assert.match(app, /title: "Compra segura"/);
+  assert.doesNotMatch(app, /Receba o kit apos a confirmacao/);
+  assert.doesNotMatch(app, /Use as paginas sempre que quiser repetir a brincadeira/);
+  const heroTrustBlocks = [...css.matchAll(/\.hero-trust\s*{(?<block>[^}]*)}/g)]
+    .map((match) => match.groups.block);
+
+  assert.ok(heroTrustBlocks.length >= 1);
+  assert.ok(
+    heroTrustBlocks.every((block) => !/grid-template-columns:\s*repeat\(3/.test(block)),
+  );
+  assert.match(css, /\.trust-pill\s*{[\s\S]*grid-template-columns:\s*22px minmax\(0, 1fr\)/);
+});

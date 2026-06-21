@@ -244,15 +244,18 @@ h3 {
 
 .hero-trust {
   display: grid;
-  gap: 10px;
-  margin-top: 22px;
+  gap: 8px;
+  max-width: 520px;
+  margin-top: 18px;
 }
 
 .trust-pill {
-  display: flex;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
   gap: 10px;
-  align-items: flex-start;
-  padding: 12px;
+  align-items: center;
+  min-height: 58px;
+  padding: 10px 12px;
   border: 1px solid rgba(247, 206, 70, 0.24);
   border-radius: 8px;
   background: rgba(16, 53, 34, 0.68);
@@ -271,12 +274,14 @@ h3 {
 
 .trust-pill strong {
   margin-bottom: 2px;
-  font-size: 0.9rem;
+  font-size: 0.86rem;
+  line-height: 1.12;
 }
 
 .trust-pill span {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
+  line-height: 1.25;
 }
 
 .section-inner {
@@ -706,10 +711,6 @@ footer p {
     padding: 54px 0;
   }
 
-  .hero-trust {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .split {
     grid-template-columns: 0.9fr 1.1fr;
   }
@@ -774,6 +775,11 @@ footer p {
 
   .hero-highlight {
     width: 100%;
+  }
+
+  .hero-trust {
+    max-width: none;
+    margin-top: 16px;
   }
 
   .cta {

@@ -112,18 +112,18 @@ const heroHighlights = [
 const trustBadges = [
   {
     icon: Clock3,
-    title: "Acesso imediato no email",
-    text: "Receba o kit apos a confirmacao.",
+    title: "Acesso imediato",
+    text: "Receba no email apos comprar.",
   },
   {
     icon: Printer,
-    title: "Imprima quando quiser",
-    text: "Use as paginas sempre que quiser repetir a brincadeira.",
+    title: "Imprima sempre",
+    text: "Use de novo quando precisar.",
   },
   {
     icon: ShieldCheck,
-    title: "PIX ou cartao",
-    text: "Compra segura pelo checkout da Cakto.",
+    title: "Compra segura",
+    text: "PIX ou cartao no checkout.",
   },
 ];
 
