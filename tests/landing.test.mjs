@@ -4,8 +4,8 @@ import { test } from "node:test";
 
 import { CHECKOUT_URL, OFFER_PRICE } from "../src/offer.mjs";
 
-test("offer price is R$14,90", () => {
-  assert.equal(OFFER_PRICE, "R$14,90");
+test("offer price is R$9,90", () => {
+  assert.equal(OFFER_PRICE, "R$9,90");
 });
 
 test("checkout points to the Cakto payment page", () => {
@@ -15,7 +15,7 @@ test("checkout points to the Cakto payment page", () => {
 test("landing page renders the expected purchase CTA copy", async () => {
   const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 
-  assert.match(app, /LIBERAR MEU KIT POR R\$14,90/);
+  assert.match(app, /LIBERAR MEU KIT POR \{OFFER_PRICE\}/);
   assert.match(app, /data-checkout-link/);
 });
 
@@ -40,7 +40,7 @@ test("landing leads with buyer desire instead of file format", async () => {
   const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 
   assert.match(app, /Complete seu album 2026 hoje sem gastar com pacotinho repetido/);
-  assert.match(app, /Liberar meu kit por R\$14,90/i);
+  assert.match(app, /LIBERAR MEU KIT POR \{OFFER_PRICE\}/);
   assert.match(app, /Monte a colecao sem depender de sorte/);
   assert.match(app, /Acesso imediato no email/);
   assert.doesNotMatch(app, /PDF/);
@@ -51,9 +51,21 @@ test("landing leads with buyer desire instead of file format", async () => {
 test("hero uses the promotional offer image", async () => {
   const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 
-  assert.match(app, /hero-promo-site\.png/);
+  assert.match(app, /hero-promo-990\.png/);
+  assert.doesNotMatch(app, /hero-promo-site\.png/);
   assert.doesNotMatch(app, /hero-promo\.jpg/);
   assert.doesNotMatch(app, /kit-hero\.png/);
+});
+
+test("landing includes a 15-minute urgency countdown", async () => {
+  const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+  const css = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+
+  assert.match(app, /COUNTDOWN_SECONDS = 15 \* 60/);
+  assert.match(app, /useCountdown/);
+  assert.match(app, /Oferta termina em/);
+  assert.match(app, /data-countdown-timer/);
+  assert.match(css, /\.countdown-panel\s*{/);
 });
 
 test("mobile layout shows the promotional image early", async () => {

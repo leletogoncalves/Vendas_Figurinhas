@@ -14,7 +14,7 @@ import {
   Trophy,
 } from "lucide-react";
 
-import heroImage from "./assets/hero-promo-site.png";
+import heroImage from "./assets/hero-promo-990.png";
 import compareDepay from "./assets/real-photos/compare-depay.jpg";
 import compareLeNormand from "./assets/real-photos/compare-le-normand.jpg";
 import compareMbappe from "./assets/real-photos/compare-mbappe.jpg";
@@ -22,6 +22,8 @@ import packetsTable from "./assets/real-photos/packets-table.jpg";
 import printGuide from "./assets/real-photos/print-guide.jpg";
 import stickerVariety from "./assets/real-photos/sticker-variety.jpg";
 import { CHECKOUT_URL, OFFER_PRICE, OLD_PRICE } from "./offer.mjs";
+
+const COUNTDOWN_SECONDS = 15 * 60;
 
 const benefits = [
   {
@@ -167,6 +169,39 @@ const faqs = [
   },
 ];
 
+function formatCountdown(seconds) {
+  const minutes = String(Math.floor(seconds / 60)).padStart(2, "0");
+  const remainingSeconds = String(seconds % 60).padStart(2, "0");
+
+  return `${minutes}:${remainingSeconds}`;
+}
+
+function useCountdown(initialSeconds = COUNTDOWN_SECONDS) {
+  const [secondsLeft, setSecondsLeft] = React.useState(initialSeconds);
+
+  React.useEffect(() => {
+    const interval = window.setInterval(() => {
+      setSecondsLeft((current) => (current > 0 ? current - 1 : initialSeconds));
+    }, 1000);
+
+    return () => window.clearInterval(interval);
+  }, [initialSeconds]);
+
+  return formatCountdown(secondsLeft);
+}
+
+function CountdownTimer() {
+  const countdown = useCountdown();
+
+  return (
+    <div className="countdown-panel" data-countdown-timer aria-live="polite">
+      <span>Oferta termina em</span>
+      <strong>{countdown}</strong>
+      <small>Garanta o valor promocional antes que o contador zere.</small>
+    </div>
+  );
+}
+
 function CheckoutButton({ children, compact = false, hero = false }) {
   return (
     <a
@@ -261,11 +296,12 @@ export function App() {
               ))}
             </div>
             <div className="hero-actions">
-              <CheckoutButton hero>LIBERAR MEU KIT POR R$14,90</CheckoutButton>
+              <CheckoutButton hero>LIBERAR MEU KIT POR {OFFER_PRICE}</CheckoutButton>
               <p>
                 <LockKeyhole aria-hidden="true" size={15} />
                 Compra segura via Cakto, com PIX ou cartao e entrega digital pelo email
               </p>
+              <CountdownTimer />
             </div>
             <div className="hero-trust">
               {trustBadges.map(({ icon: Icon, title, text }) => (
@@ -444,7 +480,7 @@ export function App() {
               <strong>{OFFER_PRICE}</strong>
               <small>Pagamento unico</small>
             </div>
-            <CheckoutButton>LIBERAR MEU KIT POR R$14,90</CheckoutButton>
+            <CheckoutButton>LIBERAR MEU KIT POR {OFFER_PRICE}</CheckoutButton>
             <p className="secure-line">
               <ShieldCheck aria-hidden="true" size={16} />
               Compra segura via Cakto, com PIX, cartao e entrega digital pelo email
@@ -514,7 +550,7 @@ export function App() {
               Receba o kit, imprima as paginas e comece a montar a
               colecao sem depender de sorte, troca ou pacotinho repetido.
             </p>
-            <CheckoutButton>LIBERAR MEU KIT POR R$14,90</CheckoutButton>
+            <CheckoutButton>LIBERAR MEU KIT POR {OFFER_PRICE}</CheckoutButton>
           </div>
         </section>
       </main>

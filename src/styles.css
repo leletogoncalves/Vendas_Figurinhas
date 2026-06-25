@@ -188,6 +188,44 @@ h3 {
   font-size: 0.88rem;
 }
 
+.countdown-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 14px;
+  align-items: center;
+  width: min(100%, 420px);
+  padding: 12px 14px;
+  border: 1px solid rgba(247, 206, 70, 0.4);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(247, 206, 70, 0.18), rgba(231, 75, 56, 0.13)),
+    rgba(16, 53, 34, 0.76);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+}
+
+.countdown-panel span {
+  color: var(--gold-400);
+  font-size: 0.78rem;
+  font-weight: 950;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.countdown-panel strong {
+  grid-row: span 2;
+  color: #fff3a8;
+  font-size: 1.75rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.countdown-panel small {
+  color: #e4f4e9;
+  font-size: 0.8rem;
+  line-height: 1.25;
+}
+
 .cta {
   display: inline-flex;
   justify-content: center;
@@ -775,6 +813,14 @@ footer p {
 
   .hero-highlight {
     width: 100%;
+  }
+
+  .countdown-panel {
+    width: 100%;
+  }
+
+  .countdown-panel strong {
+    font-size: 1.55rem;
   }
 
   .hero-trust {
