@@ -49,14 +49,21 @@ img {
   max-width: 100%;
 }
 
+.promo-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+}
+
 .top-strip {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  gap: 12px;
+  gap: 5px;
   align-items: center;
-  min-height: 42px;
-  padding: 10px 18px;
+  min-height: 58px;
+  padding: 8px 18px;
   background: linear-gradient(90deg, var(--gold-500), var(--gold-400), #fff1a8);
   color: #2a2203;
   font-size: 0.9rem;
@@ -226,6 +233,32 @@ h3 {
   line-height: 1.25;
 }
 
+.promo-header .countdown-panel {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+  padding: 8px 14px;
+  border: 0;
+  border-top: 1px solid rgba(247, 206, 70, 0.28);
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, rgba(231, 75, 56, 0.18), rgba(247, 206, 70, 0.16)),
+    rgba(7, 19, 14, 0.98);
+  box-shadow: none;
+}
+
+.promo-header .countdown-panel span,
+.promo-header .countdown-panel small {
+  font-size: 0.82rem;
+}
+
+.promo-header .countdown-panel strong {
+  grid-row: auto;
+  color: #fff3a8;
+  font-size: 1.25rem;
+}
+
 .cta {
   display: inline-flex;
   justify-content: center;
@@ -264,20 +297,22 @@ h3 {
 
 .hero-media {
   align-self: center;
-  aspect-ratio: 1.47 / 1;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border: 1px solid rgba(247, 206, 70, 0.34);
   border-radius: 8px;
   box-shadow: var(--shadow);
-  background: #04110b;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(247, 206, 70, 0.12), transparent 54%),
+    #04110b;
 }
 
 .hero-media img {
   width: 100%;
   height: 100%;
   min-height: 0;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center;
 }
 
 .hero-trust {
@@ -787,8 +822,18 @@ footer p {
 
 @media (max-width: 719px) {
   .top-strip {
-    flex-direction: column;
     gap: 6px;
+  }
+
+  .promo-header .countdown-panel {
+    flex-wrap: wrap;
+    gap: 5px 10px;
+    padding: 7px 12px;
+  }
+
+  .promo-header .countdown-panel span,
+  .promo-header .countdown-panel small {
+    font-size: 0.75rem;
   }
 
   h1 {

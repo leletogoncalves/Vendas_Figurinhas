@@ -39,10 +39,10 @@ test("landing includes real proof photos and print guide sections", async () => 
 test("landing leads with buyer desire instead of file format", async () => {
   const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 
-  assert.match(app, /Complete seu album 2026 hoje sem gastar com pacotinho repetido/);
+  assert.match(app, /Complete seu álbum 2026 hoje sem gastar com pacotinho repetido/);
   assert.match(app, /LIBERAR MEU KIT POR \{OFFER_PRICE\}/);
-  assert.match(app, /Monte a colecao sem depender de sorte/);
-  assert.match(app, /Acesso imediato no email/);
+  assert.match(app, /Monte a coleção sem depender de sorte/);
+  assert.match(app, /Acesso imediato no e-mail/);
   assert.doesNotMatch(app, /PDF/);
   assert.doesNotMatch(app, /PDF completo de figurinhas 2026 por/);
   assert.doesNotMatch(app, /PDF completo para imprimir hoje/);
@@ -66,6 +66,45 @@ test("landing includes a 15-minute urgency countdown", async () => {
   assert.match(app, /Oferta termina em/);
   assert.match(app, /data-countdown-timer/);
   assert.match(css, /\.countdown-panel\s*{/);
+});
+
+test("promo header keeps the offer and timer fixed at the top", async () => {
+  const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+  const css = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+  const header = app.match(/<header className="promo-header"[\s\S]*?<\/header>/)?.[0] ?? "";
+  const heroActions = app.match(/<div className="hero-actions">[\s\S]*?<\/div>/)?.[0] ?? "";
+
+  assert.match(header, /Promoção de lançamento/);
+  assert.match(header, /De \{OLD_PRICE\} por apenas \{OFFER_PRICE\}/);
+  assert.match(header, /<CountdownTimer \/>/);
+  assert.doesNotMatch(heroActions, /CountdownTimer/);
+  assert.match(css, /\.promo-header\s*{[\s\S]*position:\s*sticky;/);
+  assert.match(css, /\.promo-header\s*{[\s\S]*top:\s*0;/);
+  assert.match(css, /\.promo-header\s*{[\s\S]*z-index:\s*30;/);
+});
+
+test("hero artwork is shown without cropping the square image", async () => {
+  const css = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+  const heroMediaBlock = css.match(/\.hero-media\s*{(?<block>[^}]*)}/)?.groups.block ?? "";
+  const heroMediaImageBlock = css.match(/\.hero-media img\s*{(?<block>[^}]*)}/)?.groups.block ?? "";
+
+  assert.match(heroMediaBlock, /aspect-ratio:\s*1\s*\/\s*1;/);
+  assert.match(heroMediaImageBlock, /object-fit:\s*contain;/);
+  assert.doesNotMatch(heroMediaImageBlock, /object-fit:\s*cover;/);
+});
+
+test("landing copy uses polished Brazilian Portuguese accents", async () => {
+  const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+  const visibleCopy = app
+    .replace(/\s(?:id|className|aria-label|alt|src|href|key|data-[a-z-]+)=("[^"]*"|\{[^}]*\})/g, "")
+    .replace(/import [^\n]+/g, "");
+
+  assert.match(app, /Promoção de lançamento/);
+  assert.match(app, /coleção/);
+  assert.match(app, /cartão/);
+  assert.match(app, /impressão/);
+  assert.match(app, /Dúvidas comuns/);
+  assert.doesNotMatch(visibleCopy, /Promocao|colecao|Voce|cartao|impressao|Previa|fisico|preco|vinculo|Duvidas|Nao\./);
 });
 
 test("mobile layout shows the promotional image early", async () => {
